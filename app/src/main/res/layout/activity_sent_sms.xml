@@ -6,7 +6,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.latihan.warning_14.youtube.SentSMS">
+    tools:context="com.latihan.sisco.pulsa.SentSMS">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:src="@drawable/pulsa"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pulsa"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:layout_margin="20dp"/>
 
     <EditText
         android:id="@+id/idTxtPhoneNo"
@@ -15,15 +28,17 @@
         android:gravity="start"
         android:hint="Tuliskan No Telp"
         android:inputType="phone"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
 
-    <EditText
-        android:id="@+id/idTxtMsg"
+    <Spinner
+        android:id="@+id/spinner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="start"
-        android:hint="Tuliskan Isi Pesan"
-        android:textSize="20sp" />
+        android:layout_height="30sp"
+        android:layout_margin="20dp"
+        android:entries="@array/pulsa"
+        />
 
     <Button
         android:id="@+id/idbtnStart"
@@ -31,6 +46,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:onClick="sendSms"
-        android:text="Kirim SMS" />
+        android:text="Kirim SMS"
+        android:layout_margin="50dp" />
 
 </LinearLayout>

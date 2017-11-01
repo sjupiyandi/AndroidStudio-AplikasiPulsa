@@ -1,4 +1,4 @@
-package com.latihan.warning_14.youtube;
+package com.latihan.sisco.pulsa;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.latihan.warning_14.youtube", appContext.getPackageName());
+        assertEquals("com.latihan.sisco.pulsa", appContext.getPackageName());
     }
 }
