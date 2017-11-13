@@ -11,13 +11,16 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 
-public class SentSMS extends AppCompatActivity {
+public class SentSMS extends AppCompatActivity implements View.OnClickListener{
 
     private  Button btnKirim;
-    private  EditText isipesan, notelp;
+    private  EditText notelp;
+    private  Spinner spinner;
+    private String code;
 
     private static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 0;
 
@@ -26,31 +29,38 @@ public class SentSMS extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sent_sms);
         btnKirim = (Button) findViewById(R.id.idbtnStart);
-        isipesan = (EditText) findViewById(R.id.idTxtMsg);
         notelp = (EditText) findViewById(R.id.idTxtPhoneNo);
-        kirimSMS();
+        spinner =(Spinner) findViewById(R.id.spinner);
+        btnKirim.setOnClickListener(this);
     }
 
     protected void kirimSMS(){
-        btnKirim.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int permissionCheck = ContextCompat.checkSelfPermission(SentSMS.this, Manifest.permission.SEND_SMS);
+        int index= spinner.getSelectedItemPosition();
+        code = "";
+        switch (index){
+            case 0:
+                code = "S5";
+                break;
+            case 1:
+                code = "S10";
+                break;
+            default:
+                code = "";
+                break;
 
-                if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
-
-                    IsiPesan();
-                } else {
-                    ActivityCompat.requestPermissions(SentSMS.this, new String[]{Manifest.permission.SEND_SMS},
-                    MY_PERMISSIONS_REQUEST_SEND_SMS);
-                }
-            }
-        });
+        }
+        int permissionCheck = ContextCompat.checkSelfPermission(SentSMS.this, Manifest.permission.SEND_SMS);
+        if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
+               IsiPesan(code);
+        } else {
+               ActivityCompat.requestPermissions(SentSMS.this, new String[]{Manifest.permission.SEND_SMS},
+               MY_PERMISSIONS_REQUEST_SEND_SMS);
+        }
     }
 
-    public void IsiPesan(){
+    public void IsiPesan(String code){
         String myNumber = notelp.getText().toString().trim();
-        String myMsg = isipesan.getText().toString().trim()+".1234";
+        String myMsg = code +"."+ notelp.getText().toString().trim()+".1234";
         if(myNumber==null || myNumber.equals("") || myMsg==null  || myMsg.equals("") ){
             Toast.makeText(this,"Pesan Tidak Boleh Kosong",Toast.LENGTH_SHORT).show();
         }else{
@@ -72,11 +82,18 @@ public class SentSMS extends AppCompatActivity {
             {
                 if(grantResults.length>=0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
 
-                    IsiPesan();
+                    IsiPesan(code);
                 }else{
                     Toast.makeText(this,"Silahkan beri izin akses terlebih dahulu",Toast.LENGTH_SHORT).show();
                 }
             }
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == btnKirim){
+            kirimSMS();
         }
     }
 }
