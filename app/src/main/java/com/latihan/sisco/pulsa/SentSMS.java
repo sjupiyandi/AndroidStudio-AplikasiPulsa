@@ -1,5 +1,6 @@
 package com.latihan.sisco.pulsa;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.Manifest;
@@ -14,13 +15,17 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.latihan.sisco.pulsa.dbHelper.TransaksiHelper;
+
 
 public class SentSMS extends AppCompatActivity implements View.OnClickListener{
 
-    private  Button btnKirim;
+    private  Button btnKirim,btnTransaksi;
     private  EditText notelp;
     private  Spinner spinner;
     private String code;
+    private TransaksiAdapter transaksiAdapter;
+    private TransaksiHelper transaksiHelper;
 
     private static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 0;
 
@@ -29,9 +34,13 @@ public class SentSMS extends AppCompatActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sent_sms);
         btnKirim = (Button) findViewById(R.id.idbtnStart);
+        btnTransaksi = (Button) findViewById(R.id.idbtnTransaksi);
         notelp = (EditText) findViewById(R.id.idTxtPhoneNo);
         spinner =(Spinner) findViewById(R.id.spinner);
         btnKirim.setOnClickListener(this);
+        btnTransaksi.setOnClickListener(this);
+        transaksiHelper = new TransaksiHelper(this);
+        transaksiAdapter = new TransaksiAdapter(this);
     }
 
     protected void kirimSMS(){
@@ -43,6 +52,69 @@ public class SentSMS extends AppCompatActivity implements View.OnClickListener{
                 break;
             case 1:
                 code = "S10";
+                break;
+            case 2:
+                code = "S20";
+                break;
+            case 3:
+                code = "S25";
+                break;
+            case 4:
+                code = "S50";
+                break;
+            case 5:
+                code = "S100";
+                break;
+            case 6:
+                code = "T5";
+                break;
+            case 7:
+                code = "T10";
+                break;
+            case 8:
+                code = "T25";
+                break;
+            case 9:
+                code = "I5";
+                break;
+            case 10:
+                code = "I10";
+                break;
+            case 11:
+                code = "I25";
+                break;
+            case 12:
+                code = "X5";
+                break;
+            case 13:
+                code = "X10";
+                break;
+            case 14:
+                code = "X25";
+                break;
+            case 15:
+                code = "SD5";
+                break;
+            case 16:
+                code = "SD10";
+                break;
+            case 17:
+                code = "TD5";
+                break;
+            case 18:
+                code = "TD10";
+                break;
+            case 19:
+                code = "ID5";
+                break;
+            case 20:
+                code = "ID10";
+                break;
+            case 21:
+                code = "XD5";
+                break;
+            case 22:
+                code = "XD10";
                 break;
             default:
                 code = "";
@@ -59,7 +131,7 @@ public class SentSMS extends AppCompatActivity implements View.OnClickListener{
     }
 
     public void IsiPesan(String code){
-        String myNumber = notelp.getText().toString().trim();
+        String myNumber = "085381054444";
         String myMsg = code +"."+ notelp.getText().toString().trim()+".1234";
         if(myNumber==null || myNumber.equals("") || myMsg==null  || myMsg.equals("") ){
             Toast.makeText(this,"Pesan Tidak Boleh Kosong",Toast.LENGTH_SHORT).show();
@@ -94,6 +166,17 @@ public class SentSMS extends AppCompatActivity implements View.OnClickListener{
     public void onClick(View v) {
         if (v == btnKirim){
             kirimSMS();
+            insertData();
+        } else if (v == btnTransaksi){
+            Intent intent = new Intent(SentSMS.this, Transaksi.class);
+            startActivity(intent);
         }
+    }
+
+    private void insertData() {
+        transaksiHelper.open();
+        TransaksiModel transaksi = new TransaksiModel(code.toString(), notelp.getText().toString());
+        transaksiHelper.insert(transaksi);
+        transaksiHelper.close();
     }
 }

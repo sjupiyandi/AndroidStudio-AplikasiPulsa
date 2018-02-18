@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.SEND_SMS" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/pulsa"
@@ -13,7 +12,8 @@
         android:roundIcon="@drawable/pulsa"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SentSMS"
+        <activity
+            android:name=".SentSMS"
             android:label="Pulsa">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Transaksi"
+            android:label="Transaksi"></activity>
     </application>
 
 </manifest>

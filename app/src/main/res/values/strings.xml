@@ -3,10 +3,26 @@
     <string-array name="pulsa">
         <item>SIMPATI 5</item>
         <item>SIMPATI 10</item>
+        <item>SIMPATI 20</item>
+        <item>SIMPATI 25</item>
+        <item>SIMPATI 50</item>
+        <item>SIMPATI 100</item>
         <item>THREE 5</item>
         <item>THREE 10</item>
+        <item>THREE 25</item>
         <item>INDOSAT 5</item>
-        <item>INSODAT 10</item>
+        <item>INDOSAT 10</item>
+        <item>INDOSAT 25</item>
         <item>XL 5</item>
         <item>XL 10</item>
-    </string-array></resources>
+        <item>XL 25</item>
+        <item>SIMPATI 5 (KEDUA)</item>
+        <item>SIMPATI 10 (KEDUA)</item>
+        <item>THREE 5 (KEDUA)</item>
+        <item>THREE 10 (KEDUA)</item>
+        <item>INDOSAT 5 (KEDUA)</item>
+        <item>INDOSAT 10 (KEDUA)</item>
+        <item>XL 5 (KEDUA)</item>
+        <item>XL 10 (KEDUA)</item>
+    </string-array>
+</resources>
